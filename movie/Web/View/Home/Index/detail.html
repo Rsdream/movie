@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>电影详情</title>
+</head>
+<body>
+	<div style='width:900px;margin:0px auto;'>
+		<?php foreach ($this->indexInfo as $v) :?>
+			<img width='350px' src='<?=_PUBLIC_.$v['picurl']?>'><br><br>
+			影片名称：<span><?=$v['m_name']?></span><br>
+			影片类型：<span><?=$v['m_type']?></span><br>
+			影片地区：<span><?=$v['country_area']?></span><br>
+			影片时长：<span><?=$v['m_time']?>分钟</span><br><br>
+			影片导演：<span><?=$v['m_director']?></span><br>
+			影片主演：<span><?=$v['actor']?></span><br>
+			<div style='width:900px;'>影片剧情：<?=$v['content']?></div>
+		<?php endforeach;?>
+		<br>
+		<center>场次列表</center>
+	</div>
+	<center>
+		<table border='1' style='width:900px;margin:0px auto;'>
+			<tr>
+				<th>放映厅</th>
+				<th>开场时间</th>
+				<th>结束时间</th>
+				<th>票价</th>
+				<th>座位数</th>
+				<th>操作</th>
+			</tr>
+			<?php foreach ($this->movieInfo as $v) :?>
+				<tr align='center'>
+					<td><?=$v['h_id']?></td>
+					<td><?=$v['start_time']?></td>
+					<td><?=$v['end_time']?></td>
+					<td><?=$v['m_price']?></td>
+					<td><?=$v['seating']?></td>
+					<td><a href='<?=URL.'/index/seat?id='.$v['id'].'&hid='.$v['h_id']?>'>选座位</a></td>
+				</tr>
+			<?php endforeach;?>
+		</table>
+	</center>
+</body>
+</html>

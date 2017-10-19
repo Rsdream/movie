@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>今日放映</title>
+</head>
+<body>
+	<center>
+		<table border='1' width='1600px'>
+			<caption>今日放映</caption>
+			<tr align='center' >
+				<th width='100px'>影片</th>
+				<th width='100px'>影片名</th>
+				<th width='80px'>导演</th>
+				<th width='250px'>主演</th>
+				<th width='650px'>放映信息</th>
+				<th>时长</th>
+				<th>票价</th>
+				<th width='100px'>操作</th>
+			</tr>
+			<?php foreach ($this->indexInfo as $v) :?>
+			<tr align='center' height='160px'>
+				<td><img width='140px' height='150' src='./Public<?=$v['picurl']?>'></td>
+				<td><?=$v['m_name']?></td>
+				<td><?=$v['m_director']?></td>
+				<td><?=$v['actor']?></td>
+				<td><?=$v['content']?></td>
+				<td><?=$v['m_time']?></td>
+				<td><?=$v['m_price']?></td>
+				<td><a href="<?=URL.'/index/detail?id='.$v['id']?>">查看详情</a></td>
+			</tr>
+			<?php endforeach; ?>
+		</table>
+	</center>
+</body>
+</html>

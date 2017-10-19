@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>选座位</title>
+</head>
+<body>
+<form action='<?php echo URL.'/index/addOrder' ?>' method='post'>
+	<div style='width:800px;margin:0px auto;border-bottom:1px solid;'>
+		<?php $info = $this->movieInfo[0]?>
+		<input type="hidden" name="r_id" value="<?php echo $info['id'] ?>">
+		<input type="hidden" name="m_id" value="<?php echo $info['m_id'] ?>">
+		<div style='line-height:35px;float:left;'>
+			影片名称：<?php echo $info['m_name']?><br>
+			放映厅：<?php echo $info['h_id']?>号厅<br>
+			影片时长：<?php echo $info['m_time']?>分钟<br>
+			时间：<?php echo $info['time']?>　<?php echo $info['start_time']?>～<?php echo $info['end_time']?><br>
+		</div>
+		<div style='line-height:35px;float:left;margin:50px 0px 0px 300px;'>
+				手机号：<input type="text" name="phone" ><br>
+				<button>购买</button>	
+		</div>
+		<div style='clear:both;'></div>
+	</div>
+	<div style='width:100px;margin:0px auto;height:70px;'>
+		<br>
+		<div style='line-height:30px;text-align:center;background-color:#B9DEA0;width:50px;height:30px;float:left;border-radius:7px;'>可选</div>
+		<div style='line-height:30px;text-align:center;background-color:#E6CAC4;width:50px;height:30px;float:left;border-radius:7px;'>已售</div>
+	</div>
+	<div style='border:1px solid;width:1600px;margin:0px auto;'>
+		<?php $seat = explode(',',$this->seatInfo[0]['HallLayout'])?>
+		<?php foreach($seat as $k=>$v):?>
+			<?php 
+				$cols = 1;
+				$rows = $k + 1;
+				echo "<div style='line-height:35px;width:40px;height:35px;background-color:white;float:left;margin:5px 0px 5px 10px;'>".$rows."</div>";
+			?>
+			<?php foreach(str_split($v) as $keys=>$vo):?>
+				<?php 
+					if ($vo == '_') {
+						echo "<div style='line-height:35px;width:40px;height:35px;background-color:white;float:left;margin:5px 0px 5px 10px;'></div>" ;
+					} else {
+						echo "<div style='line-height:35px;width:40px;height:35px;background-color:#B9DEA0;float:left;margin:5px 0px 5px 10px;border-radius:5px;'><input type='checkbox' name='{$rows}_{$cols}' value='{$rows}-{$cols}'>".$cols."</div>";
+						$cols += 1;
+					}
+				?>
+			<?php endforeach;?>
+			<div style='clear:both;'></div>
+		<?php endforeach;?>
+	</div>
+</form>
+</body>
+</html>
